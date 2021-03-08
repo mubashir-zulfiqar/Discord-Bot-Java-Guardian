@@ -1,0 +1,7 @@
+.idea/
+.gradle/
+build/
+out/
+.env
+Notes.txt
+database.db
