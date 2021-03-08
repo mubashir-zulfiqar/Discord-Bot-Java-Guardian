@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 public class Command_Webhook implements Commands_Interface {
     private final WebhookClient client;
     private final EmbedBuilder embedBuilder = new EmbedBuilder();
-    
+
 
     public Command_Webhook() {
         WebhookClientBuilder webhookBuilder = new WebhookClientBuilder(Bot.dotenv.get("TEMP-CHAT_WEBHOOK_URL"));
