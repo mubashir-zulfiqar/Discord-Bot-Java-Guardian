@@ -13,12 +13,8 @@ import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.TextChannel;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
-@SuppressWarnings("ConstantConditions")
 public class Command_Testing implements Commands_Interface {
 
     @Override
@@ -38,21 +34,28 @@ public class Command_Testing implements Commands_Interface {
         final List<Emote> emoteList = context.getGuild().getEmotes();
 
         // <:jda:817360288293716009>
-        emoteList.forEach(emote -> {
-            if (emote.isAnimated())
-                channel.sendMessage("<a:" + emote.getName() + ":" + emote.getId() + ">").queue();
-        });
+        // emoteList.stream().map(Emote::getId).
+        String emotes = null;
+        for (Emote emote : emoteList) {
+            emotes = String.join(" **|** ", emote.isAnimated() ? "<a:" : "<:" + emote.getName() + ":" + emote.getId() + ">\n");
+        }
+        assert emotes != null;
+        channel.sendMessage(emotes).queue();
 
         // channel.sendMessage("<:" + emote.getName() + ":" + emote.getId() + ">").queue()
        channel.sendMessage("<:KurumiThonk:806334418233851955>").queue();
 
 
-        // Another Loading Gif
-        // https://i.pinimg.com/originals/f9/41/ae/f941ae9d16fd7d2957eea6e5b1100d1e.gif
-        // https://cdn.dribbble.com/users/1803770/screenshots/4277046/my-first-gif.gif
-        // https://linustechtips.com/uploads/monthly_2016_06/krizzghfqegk0fv0g3ey.gif.39cedd1a0b5944180324665a30d30ced.thumb.gif.f6bf6ded1a94ac488bc6cda2646b247a.gif
-        // https://i.pinimg.com/originals/37/cf/a9/37cfa953bb7a0394881fa123361fa5e7.gif Mute Icon
-        // https://media.giphy.com/media/qEv4UXqSP5jXy/giphy.gif
+        /*
+         Loading Giff's
+         https://i.pinimg.com/originals/7b/73/6a/7b736a33be802fc2e737e3df56b4ef0e.gif
+         https://i.pinimg.com/originals/49/c4/75/49c47592c39596189d33ffca3544313d.gif
+         https://i.pinimg.com/originals/f9/41/ae/f941ae9d16fd7d2957eea6e5b1100d1e.gif
+         https://cdn.dribbble.com/users/1803770/screenshots/4277046/my-first-gif.gif
+         https://linustechtips.com/uploads/monthly_2016_06/krizzghfqegk0fv0g3ey.gif.39cedd1a0b5944180324665a30d30ced.thumb.gif.f6bf6ded1a94ac488bc6cda2646b247a.gif
+         https://i.pinimg.com/originals/37/cf/a9/37cfa953bb7a0394881fa123361fa5e7.gif Mute Icon
+         https://media.giphy.com/media/qEv4UXqSP5jXy/giphy.gif
+        */
 
         return null;
     }

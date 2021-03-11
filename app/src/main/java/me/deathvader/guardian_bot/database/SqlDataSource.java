@@ -13,7 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 
-public class SqlDataSource implements DatabaseManager{
+public class SqlDataSource { // implements DatabaseManager
     private static final Logger LOGGER = LoggerFactory.getLogger(SqlDataSource.class);
     private final HikariDataSource ds;
 
@@ -59,7 +59,7 @@ public class SqlDataSource implements DatabaseManager{
         return ds.getConnection();
     }
 
-    @Override
+    // @Override
     public String getPrefix(long guildID) {
         try (final PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT prefix FROM guild_settings WHERE guild_id = ?")) {
             preparedStatement.setString(1, String.valueOf(guildID));
@@ -79,7 +79,7 @@ public class SqlDataSource implements DatabaseManager{
         return Bot.BOT_PREFIX;
     }
 
-    @Override
+    // @Override
     public void setPrefix(long guildID, String newPrefix) {
         try (final PreparedStatement preparedStatement = getConnection().prepareStatement("UPDATE guild_settings SET prefix = ? WHERE guild_id = ?")) {
             preparedStatement.setString(1,newPrefix);

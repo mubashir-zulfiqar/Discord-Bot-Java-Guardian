@@ -53,6 +53,7 @@ public class Commands_Manager {
         addCommand(new Command_SetPrefix());
         addCommand(new Command_Clear());
         addCommand(new Command_Embed(waiter));
+        addCommand(new Command_SetBadWord());
 
         // MUSIC COMMANDS
         addCommand(new Command_Join());

@@ -22,7 +22,7 @@ public class Bot {
     public static String BOT_PREFIX = dotenv.get("BOT_PREFIX");
     EventWaiter eventWaiter = new EventWaiter();
 
-    private Bot() throws LoginException {
+    public Bot() throws LoginException {
         WebUtils.setUserAgent("Mozilla/5.0 ɢᴜᴀʀᴅɪᴀɴ#7105 / DΣΛƬΉVΛDΣЯ#0727");
         jda = JDABuilder.createDefault(dotenv.get("BOT_TOKEN"))
                 .disableCache(EnumSet.of(CacheFlag.CLIENT_STATUS, CacheFlag.ACTIVITY))

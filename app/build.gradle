@@ -15,18 +15,16 @@ repositories {
     mavenCentral()
 }
 
-task stage(dependsOn: ['build', 'clean'])
-build.mustRunAfter clean
-
 dependencies {
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_236'
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_240'
     implementation group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.5'
     // implementation group: 'com.github.Vatuu', name: 'discord-rpc', version: '1.6.2'
     implementation group: 'me.duncte123', name: 'botCommons', version: '2.0.122'
     // compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.30'
     implementation group: 'io.github.cdimascio', name: 'dotenv-java', version: '2.2.0'
     // implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.23'
-    implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.34.0'
+    implementation group: 'org.xerial', name: 'sqlite-jdbc', version: '3.34.0' // for SQL LITE
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.23' // for MYSQL
     implementation group: 'org.json', name: 'json', version: '20201115'
     implementation group: 'com.sedmelluq', name: 'lavaplayer', version: '1.3.72'
     implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
