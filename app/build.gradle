@@ -15,6 +15,9 @@ repositories {
     mavenCentral()
 }
 
+task stage(dependsOn: ['build', 'clean'])
+build.mustRunAfter clean
+
 dependencies {
     implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_240'
     implementation group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.5'
