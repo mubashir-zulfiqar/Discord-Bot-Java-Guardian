@@ -21,12 +21,10 @@ import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.security.auth.login.LoginException;
 import java.awt.*;
 import java.io.IOException;
-import java.time.ZoneOffset;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 /**
  * @author Mubashir Zulfiqar
@@ -129,23 +127,24 @@ public class Listener extends ListenerAdapter {
         }
 
         final long guildId = event.getGuild().getIdLong();
-        final ArrayList<String> guildBadWords = DatabaseManager.INSTANCE.getBadWords(guildId);
+        /*final ArrayList<String> guildBadWords = DatabaseManager.INSTANCE.getBadWords(guildId);
         if (!guildBadWords.isEmpty()) {
             dbData.BAD_WORDS.put(guildId, guildBadWords);
-        }
+        }*/
 
         final Message message = event.getMessage();
         String prefix = dbData.PREFIXES.computeIfAbsent(guildId, DatabaseManager.INSTANCE::getPrefix);
-        String raw_message = message.getContentRaw();
+        String raw_message = message.getContentRaw().toLowerCase();
+        // ArrayList<String> arrayList = new ArrayList<>(Arrays.asList(raw_message.split(" ")));
 
-        dbData.BAD_WORDS.get(guildId).forEach(word -> {
-            if (raw_message.toLowerCase().contains(word)){
+        /*dbData.BAD_WORDS.get(guildId).forEach(word -> {
+            if (arrayList.contains(word)){
                 message.delete().queue();
                 event.getChannel().sendMessage( "<@" +
                         message.getAuthor().getId() +
                         "> you have used a swear word.\nYou have been warned 1/5 times").queue();
             }
-        });
+        });*/
 
         if (!event.getAuthor().isBot() && raw_message.equals("<@!" + Bot.dotenv.get("BOT_ID") +">")) {
             final List<Guild> authorGuilds = user.getJDA().getGuilds();

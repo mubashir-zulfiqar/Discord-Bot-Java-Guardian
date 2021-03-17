@@ -31,31 +31,43 @@ public class cloudClusterDataSource implements DatabaseManager{
 
         try (final Statement statement = getConnection().createStatement()) {
             final String botPrefix = Bot.BOT_PREFIX;
+
+            try (final PreparedStatement preparedStatement = getConnection().prepareStatement("SHOW TABLES")){
+                try (final ResultSet resultSet = preparedStatement.executeQuery()) {
+                    while (resultSet.next()){
+                        // System.out.println(resultSet.getString("Tables_in_guardian_bot"));
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
             // For Guild Prefix
-            statement.execute("CREATE TABLE IF NOT EXISTS guild_settings (" +
+            statement.addBatch("CREATE TABLE IF NOT EXISTS guild_settings (" +
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                     "guild_id VARCHAR(20) NOT NULL," +
                     "prefix VARCHAR(255) NOT NULL DEFAULT '" + botPrefix + "'" +
                     ");");
 
             // For Guild Bad Words
-            statement.execute("CREATE TABLE IF NOT EXISTS bad_words (" +
+            statement.addBatch("CREATE TABLE IF NOT EXISTS bad_words (" +
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                     "guild_id VARCHAR(20) NOT NULL," +
                     "word VARCHAR(255) NOT NULL" +
                     ");");
 
             // For Guild Members and there Warnings
-            statement.execute("CREATE TABLE IF NOT EXISTS guild_members (" +
+            statement.addBatch("CREATE TABLE IF NOT EXISTS guild_members (" +
                     "id INTEGER PRIMARY KEY AUTO_INCREMENT," +
                     "guild_id VARCHAR(20) NOT NULL," +
                     "member_id VARCHAR(255) NOT NULL," +
                     "member_warnings INTEGER(5) NULL" +
                     ");");
 
+            statement.executeBatch();
             LOGGER.info("Tables are Initialised.");
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.warn("Error in setting up Database.", e);
         }
     }
 
@@ -91,7 +103,6 @@ public class cloudClusterDataSource implements DatabaseManager{
     @Override
     public ArrayList<String> getBadWords(long guildID) {
         try (final PreparedStatement preparedStatement = getConnection().prepareStatement("SELECT word FROM bad_words WHERE guild_id = " + guildID)){
-            // preparedStatement.setString(1, String.valueOf(guildID));
             try (final ResultSet resultSet = preparedStatement.executeQuery()) {
                 final ArrayList<String> words = new ArrayList<>();
                 while (resultSet.next()){

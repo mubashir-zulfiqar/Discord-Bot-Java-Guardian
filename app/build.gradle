@@ -15,8 +15,9 @@ repositories {
     mavenCentral()
 }
 
+//noinspection SpellCheckingInspection
 dependencies {
-    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_240'
+    implementation group: 'net.dv8tion', name: 'JDA', version: '4.2.0_241'
     implementation group: 'com.jagrosh', name: 'jda-utilities', version: '3.0.5'
     // implementation group: 'com.github.Vatuu', name: 'discord-rpc', version: '1.6.2'
     implementation group: 'me.duncte123', name: 'botCommons', version: '2.0.122'
@@ -39,8 +40,9 @@ dependencies {
     implementation group: 'com.google.apis', name: 'google-api-services-youtube', version: 'v3-rev222-1.25.0'
     implementation group: 'org.apache.commons', name: 'commons-configuration2', version: '2.7'
     // implementation group: 'edu.uci.ics', name: 'crawler4j', version: '4.4.0' // WebCrawler
-    implementation group: 'org.python', name: 'jython-standalone', version: '2.7.1b2'
+    // implementation group: 'org.python', name: 'jython-standalone', version: '2.7.1b2'
     implementation group: 'org.awaitility', name: 'awaitility', version: '4.0.3'
+    // implementation group: 'com.github.natanbc', name: 'lavadsp', version: '0.7.7' // for music filters
 }
 
 compileJava.options.encoding = 'UTF-8'

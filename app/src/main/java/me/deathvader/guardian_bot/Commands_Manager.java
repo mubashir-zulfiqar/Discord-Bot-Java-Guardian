@@ -26,10 +26,6 @@ public class Commands_Manager {
     Commands_Context context;
     Commands_Interface command;
 
-    public Commands_Manager() {
-
-    }
-
     public Commands_Manager(EventWaiter waiter) {
         // GENERAL COMMANDS
         addCommand(new Command_Ping());
@@ -45,6 +41,7 @@ public class Commands_Manager {
         addCommand(new Command_BotInfo(this));
         addCommand(new Command_Invite());
         addCommand(new Command_help(this));
+        addCommand(new Command_MoveMe(waiter));
 
         // MODERATION COMMANDS
         addCommand(new Command_Kick());
@@ -66,13 +63,17 @@ public class Commands_Manager {
         addCommand(new Command_Queue());
         addCommand(new Command_Repeat());
         addCommand(new Command_Add());
+        addCommand(new Command_Volume());
 
         /* UNDER PROCESS
          addCommand(new Command_Haste());
          addCommand(new Command_Instagram());
          addCommand(new Command_SetNick());
          addCommand(new Command_Lyrics());
-         addCommand(new Commands_Weather());*/
+         addCommand(new Commands_Weather());
+        addCommand(new Command_BassBoost());
+
+         */
 
         // FOR TESTING
         addCommand(new Command_Testing());
